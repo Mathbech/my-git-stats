@@ -5,7 +5,8 @@ import express from "express";
 import { fetchStats, fetchTopLangs } from "./src/github.js";
 import { renderStatsCard } from "./src/cards/stats.js";
 import { renderTopLangsCard } from "./src/cards/top-langs.js";
-import { escapeXml, parseBool } from "./src/utils.js";
+import { parseBool } from "./src/utils.js";
+import { logError } from "./src/logger.js";
 
 const app = express();
 const PORT = process.env.PORT || 9000;
@@ -27,13 +28,17 @@ function sendSvg(res, svg) {
   res.send(svg);
 }
 
-function errorCard(message) {
-  const msg = escapeXml(message).slice(0, 80);
-  return `<svg width="495" height="80" viewBox="0 0 495 80" xmlns="http://www.w3.org/2000/svg">
-  <rect x="0.5" y="0.5" rx="4.5" width="494" height="79" fill="#fffefe" stroke="#e4e2e2"/>
-  <text x="25" y="35" fill="#e5534b" font-size="16" font-weight="700" font-family="Segoe UI, sans-serif">Something went wrong</text>
-  <text x="25" y="58" fill="#434d58" font-size="12" font-family="Segoe UI, sans-serif">${msg}</text>
-</svg>`;
+// Réponse d'erreur : statut HTTP réel + AUCUN détail interne dans le corps.
+// Un statut != 200 fait que GitHub affiche une image cassée plutôt que du texte.
+// no-store : une erreur transitoire n'est jamais mise en cache par GitHub/CDN.
+function sendError(res, status) {
+  res.status(status);
+  res.setHeader("Content-Type", "image/svg+xml; charset=utf-8");
+  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+  // SVG minimal et générique, sans le moindre détail technique.
+  res.send(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"></svg>`,
+  );
 }
 
 function allowed(username) {
@@ -44,14 +49,9 @@ function allowed(username) {
 async function handle(req, res, kind) {
   const username = req.query.username;
   try {
-    if (!username) {
-      res.status(400);
-      return sendSvg(res, errorCard("Paramètre username manquant"));
-    }
-    if (!allowed(username)) {
-      res.status(403);
-      return sendSvg(res, errorCard("username non autorisé (whitelist)"));
-    }
+    // Erreurs client : statut réel, corps neutre, pas de fuite d'info.
+    if (!username) return sendError(res, 400);
+    if (!allowed(username)) return sendError(res, 403);
 
     const key = req.originalUrl;
     const hit = cache.get(key);
@@ -75,9 +75,10 @@ async function handle(req, res, kind) {
     }
     return sendSvg(res, svg);
   } catch (err) {
-    console.error(`[${kind}] ${username}:`, err.message);
-    res.status(200); // on renvoie quand même une image (200) pour l'affichage
-    return sendSvg(res, errorCard(err.message));
+    // Le détail (token manquant, panne API GitHub…) va UNIQUEMENT dans les logs.
+    logError(kind, username, err);
+    // La page renvoie un 500 sans texte : rien d'exploitable ne s'affiche sur GitHub.
+    return sendError(res, 500);
   }
 }
 
