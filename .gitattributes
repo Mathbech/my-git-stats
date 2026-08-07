@@ -1,0 +1,5 @@
+# Force les fins de ligne LF partout dans le repo (indépendamment de l'OS).
+* text=auto eol=lf
+
+# Binaires : jamais de conversion.
+*.png binary
