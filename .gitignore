@@ -1,0 +1,16 @@
+# Secrets — NE JAMAIS committer
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Aperçus générés par le smoke test
+scripts/preview-*.svg
+scripts/preview-*.png
+
+# Divers
+*.log
+.DS_Store
