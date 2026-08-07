@@ -1,13 +1,15 @@
-# Secrets — NE JAMAIS committer
-.env
-.env.*
-!.env.example
+# Secrets locaux — JAMAIS sur git (le vrai token vit ici)
+.env.local
+.env.*.local
+
+# Config serveur — non versionnée (tu la déposes directement sur le VPS)
+apache-grs.conf
 
 # Node
 node_modules/
 npm-debug.log*
 
-# Aperçus générés par le smoke test
+# Aperçus temporaires du smoke test (la galerie versionnée est dans assets/)
 scripts/preview-*.svg
 scripts/preview-*.png
 
