@@ -8,25 +8,25 @@ Navigateur → (CloudFront plus tard) → Apache HTTPS → Node/Express (127.0.0
 
 ## Galerie & URLs
 
-Remplace `stats.tondomaine.com` par ton domaine. Aperçus générés avec des données factices (`node scripts/gen-previews.js`).
+Aperçus générés avec des données factices (`node scripts/gen-previews.js`).
 
 ### Carte de stats — `/api`
 
 | Thème | Aperçu | URL |
 | --- | --- | --- |
-| `default` | ![](./assets/stats-default.png) | `https://stats.tondomaine.com/api?username=Mathbech` |
-| `dark` | ![](./assets/stats-dark.png) | `https://stats.tondomaine.com/api?username=Mathbech&theme=dark` |
-| `radical` | ![](./assets/stats-radical.png) | `https://stats.tondomaine.com/api?username=Mathbech&theme=radical` |
-| `ocean_dark` | ![](./assets/stats-ocean_dark.png) | `https://stats.tondomaine.com/api?username=Mathbech&theme=ocean_dark` |
-| `tokyonight` | ![](./assets/stats-tokyonight.png) | `https://stats.tondomaine.com/api?username=Mathbech&theme=tokyonight` |
+| `default` | ![](./assets/stats-default.png) | `https://my-git-stats.bebech.fr/api?username=Mathbech` |
+| `dark` | ![](./assets/stats-dark.png) | `https://my-git-stats.bebech.fr/api?username=Mathbech&theme=dark` |
+| `radical` | ![](./assets/stats-radical.png) | `https://my-git-stats.bebech.fr/api?username=Mathbech&theme=radical` |
+| `ocean_dark` | ![](./assets/stats-ocean_dark.png) | `https://my-git-stats.bebech.fr/api?username=Mathbech&theme=ocean_dark` |
+| `tokyonight` | ![](./assets/stats-tokyonight.png) | `https://my-git-stats.bebech.fr/api?username=Mathbech&theme=tokyonight` |
 
 ### Top langages — `/api/top-langs`
 
 | Layout / thème | Aperçu | URL |
 | --- | --- | --- |
-| `normal` / `default` | ![](./assets/langs-normal-default.png) | `https://stats.tondomaine.com/api/top-langs?username=Mathbech` |
-| `compact` / `tokyonight` | ![](./assets/langs-compact-tokyonight.png) | `https://stats.tondomaine.com/api/top-langs?username=Mathbech&layout=compact&theme=tokyonight` |
-| `compact` / `ocean_dark` | ![](./assets/langs-compact-ocean.png) | `https://stats.tondomaine.com/api/top-langs?username=Mathbech&layout=compact&theme=ocean_dark` |
+| `normal` / `default` | ![](./assets/langs-normal-default.png) | `https://my-git-stats.bebech.fr/api/top-langs?username=Mathbech` |
+| `compact` / `tokyonight` | ![](./assets/langs-compact-tokyonight.png) | `https://my-git-stats.bebech.fr/api/top-langs?username=Mathbech&layout=compact&theme=tokyonight` |
+| `compact` / `ocean_dark` | ![](./assets/langs-compact-ocean.png) | `https://my-git-stats.bebech.fr/api/top-langs?username=Mathbech&layout=compact&theme=ocean_dark` |
 
 ### Paramètres d'URL
 
@@ -91,7 +91,7 @@ sudo a2ensite grs.conf
 sudo apache2ctl configtest && sudo systemctl reload apache2
 ```
 
-Apache écoute en 80/443 et relaie vers `127.0.0.1:9000`. Le port 9000 n'est jamais exposé au public.
+Apache écoute en 80/443 et relaie vers `127.0.0.1:9000`. Le port 9000 n'est jamais exposé au public. Instance en ligne : `https://my-git-stats.bebech.fr`.
 
 ## Instance publique (partage entre potes)
 
