@@ -10,7 +10,7 @@ import { renderTopLangsCard } from "../src/cards/top-langs.js";
 const outDir = join(dirname(fileURLToPath(import.meta.url)), "..", "assets");
 mkdirSync(outDir, { recursive: true });
 
-const stats = { name: "Mathbech", stars: 6626, commits: 1843, prs: 214, issues: 57, followers: 389 };
+const stats = { name: "Mathbech", stars: 6626, commits: 1843, prs: 214, issues: 57, reviews: 42, followers: 389 };
 const langs = [
   { name: "JavaScript", color: "#f1e05a", percent: 41.2 },
   { name: "TypeScript", color: "#3178c6", percent: 28.7 },

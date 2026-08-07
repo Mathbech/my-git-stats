@@ -4,7 +4,7 @@ import { writeFileSync } from "node:fs";
 import { renderStatsCard } from "../src/cards/stats.js";
 import { renderTopLangsCard } from "../src/cards/top-langs.js";
 
-const fakeStats = { name: "Mathbech", stars: 6626, commits: 1843, prs: 214, issues: 57, followers: 389 };
+const fakeStats = { name: "Mathbech", stars: 6626, commits: 1843, prs: 214, issues: 57, reviews: 42, followers: 389 };
 const fakeLangs = [
   { name: "JavaScript", color: "#f1e05a", percent: 41.2 },
   { name: "TypeScript", color: "#3178c6", percent: 28.7 },
