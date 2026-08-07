@@ -8,25 +8,25 @@ Navigateur → (CloudFront plus tard) → Apache HTTPS → Node/Express (127.0.0
 
 ## Galerie & URLs
 
-Remplace `stats.tondomaine.com` par ton domaine. Aperçus générés avec des données factices (`node scripts/gen-previews.js`).
+Aperçus générés avec des données factices (`node scripts/gen-previews.js`).
 
 ### Carte de stats — `/api`
 
 | Thème | Aperçu | URL |
 | --- | --- | --- |
-| `default` | ![](./assets/stats-default.png) | `https://stats.tondomaine.com/api?username=Mathbech` |
-| `dark` | ![](./assets/stats-dark.png) | `https://stats.tondomaine.com/api?username=Mathbech&theme=dark` |
-| `radical` | ![](./assets/stats-radical.png) | `https://stats.tondomaine.com/api?username=Mathbech&theme=radical` |
-| `ocean_dark` | ![](./assets/stats-ocean_dark.png) | `https://stats.tondomaine.com/api?username=Mathbech&theme=ocean_dark` |
-| `tokyonight` | ![](./assets/stats-tokyonight.png) | `https://stats.tondomaine.com/api?username=Mathbech&theme=tokyonight` |
+| `default` | ![](./assets/stats-default.png) | `https://my-git-stats.bebech.fr/api?username=Mathbech` |
+| `dark` | ![](./assets/stats-dark.png) | `https://my-git-stats.bebech.fr/api?username=Mathbech&theme=dark` |
+| `radical` | ![](./assets/stats-radical.png) | `https://my-git-stats.bebech.fr/api?username=Mathbech&theme=radical` |
+| `ocean_dark` | ![](./assets/stats-ocean_dark.png) | `https://my-git-stats.bebech.fr/api?username=Mathbech&theme=ocean_dark` |
+| `tokyonight` | ![](./assets/stats-tokyonight.png) | `https://my-git-stats.bebech.fr/api?username=Mathbech&theme=tokyonight` |
 
 ### Top langages — `/api/top-langs`
 
 | Layout / thème | Aperçu | URL |
 | --- | --- | --- |
-| `normal` / `default` | ![](./assets/langs-normal-default.png) | `https://stats.tondomaine.com/api/top-langs?username=Mathbech` |
-| `compact` / `tokyonight` | ![](./assets/langs-compact-tokyonight.png) | `https://stats.tondomaine.com/api/top-langs?username=Mathbech&layout=compact&theme=tokyonight` |
-| `compact` / `ocean_dark` | ![](./assets/langs-compact-ocean.png) | `https://stats.tondomaine.com/api/top-langs?username=Mathbech&layout=compact&theme=ocean_dark` |
+| `normal` / `default` | ![](./assets/langs-normal-default.png) | `https://my-git-stats.bebech.fr/api/top-langs?username=Mathbech` |
+| `compact` / `tokyonight` | ![](./assets/langs-compact-tokyonight.png) | `https://my-git-stats.bebech.fr/api/top-langs?username=Mathbech&layout=compact&theme=tokyonight` |
+| `compact` / `ocean_dark` | ![](./assets/langs-compact-ocean.png) | `https://my-git-stats.bebech.fr/api/top-langs?username=Mathbech&layout=compact&theme=ocean_dark` |
 
 ### Paramètres d'URL
 
@@ -36,88 +36,9 @@ Top langs : `layout` (`normal`\|`compact`), `langs_count` (1–20).
 
 Thèmes fournis : `default`, `dark`, `radical`, `ocean_dark`, `tokyonight`. Ajoute les tiens dans `src/themes.js`.
 
-## Configuration : `.env` vs `.env.local`
 
-Deux fichiers, une règle simple :
+Instance en ligne : `https://my-git-stats.bebech.fr`.
 
-- **`.env`** — versionné (committé). Uniquement des valeurs **non-sensibles** (`CACHE_SECONDS`, `WHITELIST`). `PAT_1` y reste **vide**.
-- **`.env.local`** — **ignoré par git**. C'est ici que tu mets ton vrai token. Il a la priorité sur `.env`.
-
-`.env.local` :
-
-```env
-PAT_1=ghp_ton_vrai_token
-```
-
-Le token se crée sur https://github.com/settings/tokens → *Generate new token (classic)* → scopes **`repo`** + **`read:user`**.
-
-> Priorité de chargement : variables du shell/systemd > `.env.local` > `.env`.
-
-## Démarrer en local
-
-```bash
-npm install
-# mets ton token dans .env.local
-npm start                 # http://localhost:9000/api?username=Mathbech
-```
-
-Test du rendu sans token (données factices) : `npm run smoke`.
-Régénérer la galerie : `node scripts/gen-previews.js`.
-
-## Déploiement sur le VPS (sans Docker)
-
-```bash
-# 1. Copie le projet (ex. /var/www/my-git-stats), crée .env.local avec le token
-cd /var/www/my-git-stats
-npm install --omit=dev
-
-# 2. Service systemd (démarrage auto + redémarrage si crash)
-sudo cp my-git-stats.service /etc/systemd/system/
-# édite WorkingDirectory, User, chemin de node (which node)
-sudo systemctl daemon-reload
-sudo systemctl enable --now my-git-stats
-sudo systemctl status my-git-stats
-curl -I http://127.0.0.1:9000/api?username=Mathbech    # 200, image/svg+xml
-```
-
-### Apache (reverse proxy)
-
-Le fichier `apache-grs.conf` (non versionné) sert de modèle. Sur le serveur :
-
-```bash
-sudo a2enmod proxy proxy_http headers ssl
-sudo cp apache-grs.conf /etc/apache2/sites-available/grs.conf   # édite domaine + SSL
-sudo a2ensite grs.conf
-sudo apache2ctl configtest && sudo systemctl reload apache2
-```
-
-Apache écoute en 80/443 et relaie vers `127.0.0.1:9000`. Le port 9000 n'est jamais exposé au public.
-
-## Instance publique (partage entre potes)
-
-Renseigne les usernames autorisés dans `WHITELIST` (fichier `.env`) pour protéger ton quota d'API GitHub (5000 req/h partagés sur ton token) :
-
-```env
-WHITELIST=Mathbech,pote1,pote2
-```
-
-Aucune fuite de données privées pour les autres : ton token ne voit que **tes** repos privés ; pour un autre username, GitHub ne renvoie que ses données publiques.
-
-## Structure
-
-```
-server.js              → serveur Express, routes, cache, whitelist
-src/loadenv.js         → charge .env / .env.local
-src/github.js          → requêtes GraphQL + agrégation
-src/cards/*.js         → rendu SVG des cartes
-src/themes.js          → palette de thèmes
-src/utils.js           → helpers
-scripts/smoke.js       → test de rendu hors-ligne
-scripts/gen-previews.js→ génère la galerie assets/
-assets/                → aperçus du README
-my-git-stats.service   → unit systemd
-apache-grs.conf        → modèle Apache (non versionné)
-```
 
 ## Idées d'évolution
 

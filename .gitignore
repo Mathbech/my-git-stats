@@ -2,9 +2,6 @@
 .env.local
 .env.*.local
 
-# Config serveur — non versionnée (tu la déposes directement sur le VPS)
-apache-grs.conf
-
 # Node
 node_modules/
 npm-debug.log*
@@ -13,6 +10,9 @@ npm-debug.log*
 scripts/preview-*.svg
 scripts/preview-*.png
 
-# Divers
+# Logs (générés au runtime)
+logs/
 *.log
+
+# Divers
 .DS_Store
