@@ -67,31 +67,16 @@ Régénérer la galerie : `node scripts/gen-previews.js`.
 ## Déploiement sur le VPS (sans Docker)
 
 ```bash
-# 1. Copie le projet (ex. /var/www/my-git-stats), crée .env.local avec le token
-cd /var/www/my-git-stats
+# Copie le projet, crée .env.local avec le token, puis :
 npm install --omit=dev
-
-# 2. Service systemd (démarrage auto + redémarrage si crash)
-sudo cp my-git-stats.service /etc/systemd/system/
-# édite WorkingDirectory, User, chemin de node (which node)
-sudo systemctl daemon-reload
-sudo systemctl enable --now my-git-stats
-sudo systemctl status my-git-stats
-curl -I http://127.0.0.1:9000/api?username=Mathbech    # 200, image/svg+xml
+node server.js            # écoute sur 127.0.0.1:9000
 ```
 
-### Apache (reverse proxy)
+Garde le process en vie avec ce que tu préfères (systemd, pm2…) et place un
+reverse proxy HTTPS devant (Apache/Nginx/Caddy) qui relaie vers `127.0.0.1:9000`.
+Le port 9000 n'est jamais exposé directement au public.
 
-Le fichier `apache-grs.conf` (non versionné) sert de modèle. Sur le serveur :
-
-```bash
-sudo a2enmod proxy proxy_http headers ssl
-sudo cp apache-grs.conf /etc/apache2/sites-available/grs.conf   # édite domaine + SSL
-sudo a2ensite grs.conf
-sudo apache2ctl configtest && sudo systemctl reload apache2
-```
-
-Apache écoute en 80/443 et relaie vers `127.0.0.1:9000`. Le port 9000 n'est jamais exposé au public. Instance en ligne : `https://my-git-stats.bebech.fr`.
+Instance en ligne : `https://my-git-stats.bebech.fr`.
 
 ## Instance publique (partage entre potes)
 
@@ -112,11 +97,10 @@ src/github.js          → requêtes GraphQL + agrégation
 src/cards/*.js         → rendu SVG des cartes
 src/themes.js          → palette de thèmes
 src/utils.js           → helpers
+src/logger.js          → journalisation des erreurs (fichier + console)
 scripts/smoke.js       → test de rendu hors-ligne
 scripts/gen-previews.js→ génère la galerie assets/
 assets/                → aperçus du README
-my-git-stats.service   → unit systemd
-apache-grs.conf        → modèle Apache (non versionné)
 ```
 
 ## Idées d'évolution
