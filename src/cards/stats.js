@@ -18,7 +18,7 @@ export function renderStatsCard(stats, query = {}) {
 
   const rows = [
     { icon: "⭐", label: "Total Stars Earned", value: stats.stars },
-    { icon: "⬆", label: "Total Commits", value: stats.commits },
+    { icon: "⬆", label: "Total Commits (last year)", value: stats.commits },
     { icon: "🔀", label: "Total PRs", value: stats.prs },
     { icon: "ⓘ", label: "Total Issues", value: stats.issues },
     { icon: "👥", label: "Followers", value: stats.followers },
