@@ -1,0 +1,31 @@
+<svg width="495" height="205" viewBox="0 0 495 205" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mathbech's GitHub Stats">
+  <rect x="0.5" y="0.5" rx="4.5" width="494" height="204" fill="#141321" stroke="#e4e2e2" stroke-opacity="1"/>
+  <text x="25" y="35" fill="#fe428e" font-size="18" font-weight="700" font-family="Segoe UI, Ubuntu, sans-serif">Mathbech's GitHub Stats</text>
+  <g font-family="Segoe UI, Ubuntu, sans-serif">
+      <g>
+        
+        <text x="25" y="55" fill="#a9fef7" font-size="14" font-weight="600">Total Stars Earned</text>
+        <text x="470" y="55" fill="#a9fef7" font-size="14" font-weight="700" text-anchor="end">6.6k</text>
+      </g>
+      <g>
+        
+        <text x="25" y="80" fill="#a9fef7" font-size="14" font-weight="600">Total Commits</text>
+        <text x="470" y="80" fill="#a9fef7" font-size="14" font-weight="700" text-anchor="end">1.8k</text>
+      </g>
+      <g>
+        
+        <text x="25" y="105" fill="#a9fef7" font-size="14" font-weight="600">Total PRs</text>
+        <text x="470" y="105" fill="#a9fef7" font-size="14" font-weight="700" text-anchor="end">214</text>
+      </g>
+      <g>
+        
+        <text x="25" y="130" fill="#a9fef7" font-size="14" font-weight="600">Total Issues</text>
+        <text x="470" y="130" fill="#a9fef7" font-size="14" font-weight="700" text-anchor="end">57</text>
+      </g>
+      <g>
+        
+        <text x="25" y="155" fill="#a9fef7" font-size="14" font-weight="600">Followers</text>
+        <text x="470" y="155" fill="#a9fef7" font-size="14" font-weight="700" text-anchor="end">389</text>
+      </g>
+  </g>
+</svg>

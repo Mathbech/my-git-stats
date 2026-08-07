@@ -1,0 +1,31 @@
+<svg width="300" height="255" viewBox="0 0 300 255" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Most Used Languages">
+  <rect x="0.5" y="0.5" rx="4.5" width="299" height="254" fill="#fffefe" stroke="#e4e2e2" stroke-opacity="1"/>
+  <text x="25" y="35" fill="#2f80ed" font-size="18" font-weight="700" font-family="Segoe UI, Ubuntu, sans-serif">Most Used Languages</text>
+  <g font-family="Segoe UI, Ubuntu, sans-serif">
+      <g transform="translate(0, 55)">
+        <text x="25" y="0" fill="#434d58" font-size="14" font-weight="600">JavaScript 41.20%</text>
+        <rect x="25" y="10" width="250" height="8" rx="4" fill="#ddd"/>
+        <rect x="25" y="10" width="103.00000000000001" height="8" rx="4" fill="#f1e05a"/>
+      </g>
+      <g transform="translate(0, 95)">
+        <text x="25" y="0" fill="#434d58" font-size="14" font-weight="600">TypeScript 28.70%</text>
+        <rect x="25" y="10" width="250" height="8" rx="4" fill="#ddd"/>
+        <rect x="25" y="10" width="71.75" height="8" rx="4" fill="#3178c6"/>
+      </g>
+      <g transform="translate(0, 135)">
+        <text x="25" y="0" fill="#434d58" font-size="14" font-weight="600">Python 15.10%</text>
+        <rect x="25" y="10" width="250" height="8" rx="4" fill="#ddd"/>
+        <rect x="25" y="10" width="37.75" height="8" rx="4" fill="#3572A5"/>
+      </g>
+      <g transform="translate(0, 175)">
+        <text x="25" y="0" fill="#434d58" font-size="14" font-weight="600">CSS 9.40%</text>
+        <rect x="25" y="10" width="250" height="8" rx="4" fill="#ddd"/>
+        <rect x="25" y="10" width="23.5" height="8" rx="4" fill="#563d7c"/>
+      </g>
+      <g transform="translate(0, 215)">
+        <text x="25" y="0" fill="#434d58" font-size="14" font-weight="600">Shell 5.60%</text>
+        <rect x="25" y="10" width="250" height="8" rx="4" fill="#ddd"/>
+        <rect x="25" y="10" width="13.999999999999998" height="8" rx="4" fill="#89e051"/>
+      </g>
+  </g>
+</svg>

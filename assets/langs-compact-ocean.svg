@@ -1,0 +1,26 @@
+<svg width="300" height="175" viewBox="0 0 300 175" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Most Used Languages">
+  <rect x="0.5" y="0.5" rx="4.5" width="299" height="174" fill="#0f1c2e" stroke="#2b4257" stroke-opacity="1"/>
+  <text x="25" y="35" fill="#6fc3df" font-size="18" font-weight="700" font-family="Segoe UI, Ubuntu, sans-serif">Most Used Languages</text>
+  <g font-family="Segoe UI, Ubuntu, sans-serif"><rect x="25" y="55" width="250" height="8" rx="4" fill="#ddd"/><rect x="25" y="55" width="103.00000000000001" height="8" fill="#f1e05a"/><rect x="128" y="55" width="71.75" height="8" fill="#3178c6"/><rect x="199.75" y="55" width="37.75" height="8" fill="#3572A5"/><rect x="237.5" y="55" width="23.5" height="8" fill="#563d7c"/><rect x="261" y="55" width="13.999999999999998" height="8" fill="#89e051"/>
+      <g transform="translate(25, 90)">
+        <circle cx="5" cy="-4" r="5" fill="#f1e05a"/>
+        <text x="16" y="0" fill="#c0f0ff" font-size="12" font-weight="500">JavaScript 41.20%</text>
+      </g>
+      <g transform="translate(165, 90)">
+        <circle cx="5" cy="-4" r="5" fill="#3178c6"/>
+        <text x="16" y="0" fill="#c0f0ff" font-size="12" font-weight="500">TypeScript 28.70%</text>
+      </g>
+      <g transform="translate(25, 115)">
+        <circle cx="5" cy="-4" r="5" fill="#3572A5"/>
+        <text x="16" y="0" fill="#c0f0ff" font-size="12" font-weight="500">Python 15.10%</text>
+      </g>
+      <g transform="translate(165, 115)">
+        <circle cx="5" cy="-4" r="5" fill="#563d7c"/>
+        <text x="16" y="0" fill="#c0f0ff" font-size="12" font-weight="500">CSS 9.40%</text>
+      </g>
+      <g transform="translate(25, 140)">
+        <circle cx="5" cy="-4" r="5" fill="#89e051"/>
+        <text x="16" y="0" fill="#c0f0ff" font-size="12" font-weight="500">Shell 5.60%</text>
+      </g>
+  </g>
+</svg>
