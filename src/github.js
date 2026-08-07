@@ -39,6 +39,7 @@ query userStats($login: String!) {
     contributionsCollection {
       totalCommitContributions
       restrictedContributionsCount
+      totalPullRequestReviewContributions
     }
     pullRequests(first: 1) { totalCount }
     issues(first: 1) { totalCount }
@@ -69,6 +70,7 @@ export async function fetchStats(username, { includeAllCommits = false } = {}) {
     commits,
     prs: user.pullRequests.totalCount,
     issues: user.issues.totalCount,
+    reviews: user.contributionsCollection.totalPullRequestReviewContributions,
     followers: user.followers.totalCount,
   };
 }

@@ -31,15 +31,15 @@ Aperçus générés avec des données factices (`node scripts/gen-previews.js`).
 ### Paramètres d'URL
 
 Communs : `theme`, `title_color`, `text_color`, `icon_color`, `bg_color`, `border_color`, `hide_border`, `custom_title`, `card_width`.
-Stats : `show_icons`, `include_all_commits`.
+Stats : `show_icons`, `include_all_commits`, `hide_rank`, `ring_color`.
 Top langs : `layout` (`normal`\|`compact`), `langs_count` (1–20).
 
 Thèmes fournis : `default`, `dark`, `radical`, `ocean_dark`, `tokyonight`. Ajoute les tiens dans `src/themes.js`.
 
+Le **rang** (cercle S / A+ / A … C) est un score calculé par le service (`src/rank.js`, même formule que github-readme-stats : somme pondérée de percentiles sur commits, PRs, issues, reviews, stars, followers). Ce n'est **pas** une métrique officielle GitHub. Masque-le avec `hide_rank=true`.
 
 Instance en ligne : `https://my-git-stats.bebech.fr`.
 
-
 ## Idées d'évolution
 
-Cartes `pin` / `gist` / `wakatime`, calcul du rang, pagination au-delà de 100 repos, cache Redis, rotation multi-tokens (`PAT_1..PAT_n`). La structure `src/cards/*` + route dans `server.js` est faite pour s'étendre.
+Cartes `pin` / `gist` / `wakatime`, pagination au-delà de 100 repos, cache Redis, rotation multi-tokens (`PAT_1..PAT_n`). La structure `src/cards/*` + route dans `server.js` est faite pour s'étendre.
