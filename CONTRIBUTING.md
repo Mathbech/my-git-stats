@@ -34,6 +34,7 @@ Merci de vouloir contribuer ! Ce projet est ouvert : **aucun accès en écriture
 
 - **Branches** : `feat/...`, `fix/...`, `docs/...`, `chore/...`.
 - **Commits** : messages clairs à l'impératif. Les [Conventional Commits](https://www.conventionalcommits.org/) sont appréciés mais pas obligatoires.
+- **Signature** : les commits doivent être signés (GPG/SSH) pour apparaître « Verified ». Configure `git config commit.gpgsign true` et ta `user.signingkey`. Voir la [doc GitHub](https://docs.github.com/authentication/managing-commit-signature-verification).
 - **Style** : ESLint + Prettier gèrent le formatage. Ne te bats pas contre eux, lance `npm run format`.
 - **Tests** : ajoute ou mets à jour les tests quand tu changes une logique (`test/`). Le smoke test hors-ligne (`npm run smoke`) doit toujours passer.
 
