@@ -14,5 +14,8 @@ scripts/preview-*.png
 logs/
 *.log
 
+# Couverture de code (générée par les tests / la CI)
+coverage/
+
 # Divers
 .DS_Store

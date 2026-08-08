@@ -28,7 +28,9 @@ export function formatNumber(n) {
 export function sanitizeHex(value, fallback) {
   if (!value) return fallback;
   const v = String(value).replace(/^#/, "");
-  return /^([0-9a-fA-F]{3}|[0-9a-fA-F]{4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(v)
+  return /^([0-9a-fA-F]{3}|[0-9a-fA-F]{4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(
+    v,
+  )
     ? `#${v}`
     : fallback;
 }

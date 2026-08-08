@@ -1,5 +1,14 @@
 # my-git-stats
 
+[![CI](https://github.com/Mathbech/my-git-stats/actions/workflows/ci.yml/badge.svg)](https://github.com/Mathbech/my-git-stats/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
+
+[![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=Mathbech_my-git-stats&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Mathbech_my-git-stats)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Mathbech_my-git-stats&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Mathbech_my-git-stats)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=Mathbech_my-git-stats&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=Mathbech_my-git-stats)
+
 Ton propre service de cartes de stats GitHub en SVG, écrit de zéro — **aucun fork**. Node + Express interrogent l'API GraphQL de GitHub et génèrent les images. L'API reproduit les URLs de github-readme-stats, donc tu remplaces juste `...vercel.app` par ton domaine dans tes READMEs.
 
 ```
@@ -12,21 +21,21 @@ Aperçus générés avec des données factices (`node scripts/gen-previews.js`).
 
 ### Carte de stats — `/api`
 
-| Thème | Aperçu | URL |
-| --- | --- | --- |
-| `default` | ![](./assets/stats-default.png) | `https://my-git-stats.bebech.fr/api?username=Mathbech` |
-| `dark` | ![](./assets/stats-dark.png) | `https://my-git-stats.bebech.fr/api?username=Mathbech&theme=dark` |
-| `radical` | ![](./assets/stats-radical.png) | `https://my-git-stats.bebech.fr/api?username=Mathbech&theme=radical` |
+| Thème        | Aperçu                             | URL                                                                     |
+| ------------ | ---------------------------------- | ----------------------------------------------------------------------- |
+| `default`    | ![](./assets/stats-default.png)    | `https://my-git-stats.bebech.fr/api?username=Mathbech`                  |
+| `dark`       | ![](./assets/stats-dark.png)       | `https://my-git-stats.bebech.fr/api?username=Mathbech&theme=dark`       |
+| `radical`    | ![](./assets/stats-radical.png)    | `https://my-git-stats.bebech.fr/api?username=Mathbech&theme=radical`    |
 | `ocean_dark` | ![](./assets/stats-ocean_dark.png) | `https://my-git-stats.bebech.fr/api?username=Mathbech&theme=ocean_dark` |
 | `tokyonight` | ![](./assets/stats-tokyonight.png) | `https://my-git-stats.bebech.fr/api?username=Mathbech&theme=tokyonight` |
 
 ### Top langages — `/api/top-langs`
 
-| Layout / thème | Aperçu | URL |
-| --- | --- | --- |
-| `normal` / `default` | ![](./assets/langs-normal-default.png) | `https://my-git-stats.bebech.fr/api/top-langs?username=Mathbech` |
+| Layout / thème           | Aperçu                                     | URL                                                                                              |
+| ------------------------ | ------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `normal` / `default`     | ![](./assets/langs-normal-default.png)     | `https://my-git-stats.bebech.fr/api/top-langs?username=Mathbech`                                 |
 | `compact` / `tokyonight` | ![](./assets/langs-compact-tokyonight.png) | `https://my-git-stats.bebech.fr/api/top-langs?username=Mathbech&layout=compact&theme=tokyonight` |
-| `compact` / `ocean_dark` | ![](./assets/langs-compact-ocean.png) | `https://my-git-stats.bebech.fr/api/top-langs?username=Mathbech&layout=compact&theme=ocean_dark` |
+| `compact` / `ocean_dark` | ![](./assets/langs-compact-ocean.png)      | `https://my-git-stats.bebech.fr/api/top-langs?username=Mathbech&layout=compact&theme=ocean_dark` |
 
 ### Paramètres d'URL
 

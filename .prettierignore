@@ -1,0 +1,5 @@
+node_modules/
+assets/
+logs/
+package-lock.json
+scripts/preview-*

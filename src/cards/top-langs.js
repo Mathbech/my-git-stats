@@ -11,16 +11,37 @@ export function renderTopLangsCard(langs, query = {}) {
 
   const hideBorder = parseBool(query.hide_border, false);
   const compact = query.layout === "compact";
-  const count = Math.min(Math.max(parseInt(query.langs_count || "5", 10) || 5, 1), 20);
-  const title = query.custom_title ? escapeXml(query.custom_title) : "Most Used Languages";
+  const count = Math.min(
+    Math.max(parseInt(query.langs_count || "5", 10) || 5, 1),
+    20,
+  );
+  const title = query.custom_title
+    ? escapeXml(query.custom_title)
+    : "Most Used Languages";
 
   const top = langs.slice(0, count);
   const width = Number(query.card_width) || 300;
 
   if (compact) {
-    return renderCompact(top, { title, width, title_color, text_color, bg_color, border_color, hideBorder });
+    return renderCompact(top, {
+      title,
+      width,
+      title_color,
+      text_color,
+      bg_color,
+      border_color,
+      hideBorder,
+    });
   }
-  return renderNormal(top, { title, width, title_color, text_color, bg_color, border_color, hideBorder });
+  return renderNormal(top, {
+    title,
+    width,
+    title_color,
+    text_color,
+    bg_color,
+    border_color,
+    hideBorder,
+  });
 }
 
 function renderNormal(top, o) {
@@ -73,7 +94,11 @@ function renderCompact(top, o) {
 
   const rows = Math.ceil(top.length / 2);
   const height = 90 + rows * 25 + 10;
-  return svgWrap(o, height, `<rect x="25" y="55" width="${totalBarWidth}" height="8" rx="4" fill="#ddd"/>${segments}${legend}`);
+  return svgWrap(
+    o,
+    height,
+    `<rect x="25" y="55" width="${totalBarWidth}" height="8" rx="4" fill="#ddd"/>${segments}${legend}`,
+  );
 }
 
 function svgWrap(o, height, inner) {
@@ -87,5 +112,9 @@ function svgWrap(o, height, inner) {
 
 function escapeColor(c) {
   if (!c) return "#858585";
-  return /^#?[0-9a-fA-F]{3,8}$/.test(c) ? (c.startsWith("#") ? c : `#${c}`) : "#858585";
+  return /^#?[0-9a-fA-F]{3,8}$/.test(c)
+    ? c.startsWith("#")
+      ? c
+      : `#${c}`
+    : "#858585";
 }
