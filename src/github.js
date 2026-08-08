@@ -5,7 +5,8 @@ const GITHUB_GRAPHQL = "https://api.github.com/graphql";
 
 function getToken() {
   const token = process.env.PAT_1 || process.env.GITHUB_TOKEN;
-  if (!token) throw new Error("Aucun token : définis PAT_1 dans l'environnement.");
+  if (!token)
+    throw new Error("Aucun token : définis PAT_1 dans l'environnement.");
   return token;
 }
 
@@ -62,7 +63,9 @@ export async function fetchStats(username, { includeAllCommits = false } = {}) {
   );
   const commits =
     user.contributionsCollection.totalCommitContributions +
-    (includeAllCommits ? user.contributionsCollection.restrictedContributionsCount : 0);
+    (includeAllCommits
+      ? user.contributionsCollection.restrictedContributionsCount
+      : 0);
 
   return {
     name: user.name || user.login,
@@ -101,7 +104,11 @@ export async function fetchTopLangs(username) {
   for (const repo of user.repositories.nodes) {
     for (const edge of repo.languages.edges) {
       const name = edge.node.name;
-      const prev = totals.get(name) || { name, color: edge.node.color || "#858585", size: 0 };
+      const prev = totals.get(name) || {
+        name,
+        color: edge.node.color || "#858585",
+        size: 0,
+      };
       prev.size += edge.size;
       totals.set(name, prev);
     }

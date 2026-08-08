@@ -10,7 +10,10 @@ import { logError } from "./src/logger.js";
 
 const app = express();
 const PORT = process.env.PORT || 9000;
-const CACHE_SECONDS = Math.max(parseInt(process.env.CACHE_SECONDS || "21600", 10), 0);
+const CACHE_SECONDS = Math.max(
+  parseInt(process.env.CACHE_SECONDS || "21600", 10),
+  0,
+);
 const WHITELIST = (process.env.WHITELIST || "")
   .split(",")
   .map((s) => s.trim().toLowerCase())
