@@ -10,6 +10,7 @@
     "smoke": "node scripts/smoke.js",
     "test": "node --test test/*.test.js",
     "coverage": "node --test --experimental-test-coverage test/*.test.js",
+    "coverage:lcov": "node -e \"require('fs').mkdirSync('coverage',{recursive:true})\" && node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=coverage/lcov.info test/*.test.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",

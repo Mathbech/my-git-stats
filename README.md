@@ -5,10 +5,9 @@
 [![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 
-<!-- SonarCloud (à activer plus tard) :
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Mathbech_my-git-stats&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Mathbech_my-git-stats)
+[![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=Mathbech_my-git-stats&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Mathbech_my-git-stats)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Mathbech_my-git-stats&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Mathbech_my-git-stats)
--->
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=Mathbech_my-git-stats&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=Mathbech_my-git-stats)
 
 Ton propre service de cartes de stats GitHub en SVG, écrit de zéro — **aucun fork**. Node + Express interrogent l'API GraphQL de GitHub et génèrent les images. L'API reproduit les URLs de github-readme-stats, donc tu remplaces juste `...vercel.app` par ton domaine dans tes READMEs.
 

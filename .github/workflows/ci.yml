@@ -36,3 +36,33 @@ jobs:
 
       - name: Smoke test (rendu hors-ligne)
         run: npm run smoke
+
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    needs: quality
+    # Le scan ne tourne pas sur les PR issues d'un fork (le secret SONAR_TOKEN
+    # n'y est pas exposé).
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Sonar a besoin de l'historique complet (blame).
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Coverage (LCOV)
+        run: npm run coverage:lcov
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
