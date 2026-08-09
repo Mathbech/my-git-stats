@@ -27,7 +27,7 @@ Merci de vouloir contribuer ! Ce projet est ouvert : **aucun accès en écriture
 
 ## Prérequis
 
-- Node.js >= 20 (la CI teste aussi sur 22).
+- Node.js >= 22 (la CI teste sur 22 et 24).
 - Un _Personal Access Token_ GitHub pour les tests contre l'API réelle. Il va **uniquement** dans `.env.local` (ignoré par git). Ne committe jamais de token.
 
 ## Conventions

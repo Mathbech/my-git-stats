@@ -31,8 +31,12 @@ async function graphql(query, variables) {
   return json.data;
 }
 
+// Garde-fou : plafonne le nombre de pages pour éviter une boucle infinie
+// ou une explosion du coût de requêtes (100 repos/page).
+const MAX_PAGES = 20;
+
 const STATS_QUERY = `
-query userStats($login: String!) {
+query userStats($login: String!, $after: String) {
   user(login: $login) {
     name
     login
@@ -44,23 +48,35 @@ query userStats($login: String!) {
     }
     pullRequests(first: 1) { totalCount }
     issues(first: 1) { totalCount }
-    repositories(first: 100, ownerAffiliations: OWNER, orderBy: { field: STARGAZERS, direction: DESC }) {
+    repositories(first: 100, after: $after, ownerAffiliations: OWNER, orderBy: { field: STARGAZERS, direction: DESC }) {
       totalCount
       nodes { stargazers { totalCount } }
+      pageInfo { hasNextPage endCursor }
     }
   }
 }`;
 
-/** Récupère les stats agrégées d'un utilisateur. */
+/** Récupère les stats agrégées d'un utilisateur (pagine au-delà de 100 repos). */
 export async function fetchStats(username, { includeAllCommits = false } = {}) {
-  const data = await graphql(STATS_QUERY, { login: username });
-  const user = data.user;
-  if (!user) throw new Error(`Utilisateur introuvable : ${username}`);
+  let after = null;
+  let user = null; // métadonnées conservées depuis la 1re page
+  let totalStars = 0;
 
-  const totalStars = user.repositories.nodes.reduce(
-    (sum, r) => sum + (r.stargazers?.totalCount || 0),
-    0,
-  );
+  for (let page = 0; page < MAX_PAGES; page++) {
+    const data = await graphql(STATS_QUERY, { login: username, after });
+    if (!data.user) throw new Error(`Utilisateur introuvable : ${username}`);
+    if (!user) user = data.user;
+
+    const repos = data.user.repositories;
+    totalStars += repos.nodes.reduce(
+      (sum, r) => sum + (r.stargazers?.totalCount || 0),
+      0,
+    );
+
+    if (!repos.pageInfo.hasNextPage) break;
+    after = repos.pageInfo.endCursor;
+  }
+
   const commits =
     user.contributionsCollection.totalCommitContributions +
     (includeAllCommits
@@ -79,9 +95,9 @@ export async function fetchStats(username, { includeAllCommits = false } = {}) {
 }
 
 const LANGS_QUERY = `
-query userLangs($login: String!) {
+query userLangs($login: String!, $after: String) {
   user(login: $login) {
-    repositories(first: 100, ownerAffiliations: OWNER, isFork: false) {
+    repositories(first: 100, after: $after, ownerAffiliations: OWNER, isFork: false) {
       nodes {
         languages(first: 10, orderBy: { field: SIZE, direction: DESC }) {
           edges {
@@ -90,28 +106,36 @@ query userLangs($login: String!) {
           }
         }
       }
+      pageInfo { hasNextPage endCursor }
     }
   }
 }`;
 
-/** Récupère et agrège les langages (en octets) d'un utilisateur. */
+/** Récupère et agrège les langages (en octets) d'un utilisateur (pagine au-delà de 100 repos). */
 export async function fetchTopLangs(username) {
-  const data = await graphql(LANGS_QUERY, { login: username });
-  const user = data.user;
-  if (!user) throw new Error(`Utilisateur introuvable : ${username}`);
-
   const totals = new Map();
-  for (const repo of user.repositories.nodes) {
-    for (const edge of repo.languages.edges) {
-      const name = edge.node.name;
-      const prev = totals.get(name) || {
-        name,
-        color: edge.node.color || "#858585",
-        size: 0,
-      };
-      prev.size += edge.size;
-      totals.set(name, prev);
+  let after = null;
+
+  for (let page = 0; page < MAX_PAGES; page++) {
+    const data = await graphql(LANGS_QUERY, { login: username, after });
+    const user = data.user;
+    if (!user) throw new Error(`Utilisateur introuvable : ${username}`);
+
+    for (const repo of user.repositories.nodes) {
+      for (const edge of repo.languages.edges) {
+        const name = edge.node.name;
+        const prev = totals.get(name) || {
+          name,
+          color: edge.node.color || "#858585",
+          size: 0,
+        };
+        prev.size += edge.size;
+        totals.set(name, prev);
+      }
     }
+
+    if (!user.repositories.pageInfo.hasNextPage) break;
+    after = user.repositories.pageInfo.endCursor;
   }
 
   const langs = [...totals.values()].sort((a, b) => b.size - a.size);

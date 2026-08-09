@@ -9,11 +9,7 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Mathbech_my-git-stats&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Mathbech_my-git-stats)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=Mathbech_my-git-stats&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=Mathbech_my-git-stats)
 
-Ton propre service de cartes de stats GitHub en SVG, écrit de zéro — **aucun fork**. Node + Express interrogent l'API GraphQL de GitHub et génèrent les images. L'API reproduit les URLs de github-readme-stats, donc tu remplaces juste `...vercel.app` par ton domaine dans tes READMEs.
-
-```
-Navigateur → (CloudFront plus tard) → Apache HTTPS → Node/Express (127.0.0.1:9000) → API GitHub
-```
+Service de carte de stats GitHub SVG, pour les README de profil GitHub
 
 ## Galerie & URLs
 
