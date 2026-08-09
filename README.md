@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/Mathbech/my-git-stats/actions/workflows/ci.yml/badge.svg)](https://github.com/Mathbech/my-git-stats/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
-[![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org)
+[![Node](https://img.shields.io/badge/node-%3E%3D22-brightgreen.svg)](https://nodejs.org)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 
 [![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=Mathbech_my-git-stats&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Mathbech_my-git-stats)
