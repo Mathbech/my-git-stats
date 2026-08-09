@@ -1,6 +1,6 @@
 {
   "name": "my-git-stats",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Service maison de cartes de stats GitHub en SVG (self-hosted).",
   "type": "module",
   "main": "server.js",
@@ -17,7 +17,7 @@
     "format:check": "prettier --check ."
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "dependencies": {
     "express": "^4.19.2"
